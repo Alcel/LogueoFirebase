@@ -2,4 +2,8 @@
     <string name="app_name">LogueoFirebase</string>
     <string name="msg_restablecerclave">Clave reestablecida</string>
     <string name="msg_borraruser">Usuario eliminado</string>
+    <string name="editClave">Contraseña</string>
+    <string name="editUser">Correo</string>
+    <string name="logIn">Entrar</string>
+    <string name="register">Registrarse</string>
 </resources>
