@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.example.logueofirebase.databinding.ActivityMainBinding
+import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
+import com.google.rpc.context.AttributeContext.Auth
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding //Diferente
@@ -36,6 +38,14 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this,it.exception.toString(),Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    companion object{
+        private const val RC_SIGN_IN=423
+    }
+
+    fun iniciarSesionGoogle(){
+        val providerGoogle = arrayListOf(AuthUI.IdpConfig.GoogleBuilder().build())
     }
 
     override fun onStart() {
