@@ -6,4 +6,9 @@
     <string name="editUser">Correo</string>
     <string name="logIn">Entrar</string>
     <string name="register">Registrarse</string>
+    <string name="titulo">Titulo</string>
+    <string name="correo">Correo</string>
+    <string name="usuario">Usuario</string>
+    <string name="nacionalidad">Nacionalidad</string>
+    <string name="edad">Edad</string>
 </resources>

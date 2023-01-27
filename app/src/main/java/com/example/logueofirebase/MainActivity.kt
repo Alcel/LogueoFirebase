@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import com.example.logueofirebase.databinding.ActivityMainBinding
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
@@ -29,6 +30,11 @@ class MainActivity : AppCompatActivity() {
             correo = binding.editTextUsuario.text.toString()
             clave = binding.editTextClave.text.toString()
             crearNuevoUsuario(correo,clave) }
+        binding.buttonLogIn.setOnClickListener {
+            correo = binding.editTextUsuario.text.toString()
+            clave = binding.editTextClave.text.toString()
+            iniciarSesion(correo,clave)
+        }
 
     }
     fun crearNuevoUsuario(email:String, clave: String) {
@@ -36,6 +42,7 @@ class MainActivity : AppCompatActivity() {
             .addOnCompleteListener {
                 if(it.isSuccessful){
                     println("bien")
+                    writeNewUser(email)
                  // Por hacer   abrirPerfil()
                 }
                 else{
@@ -50,6 +57,8 @@ class MainActivity : AppCompatActivity() {
     fun iniciarSesion(email:String,clave: String){
         FirebaseAuth.getInstance().signInWithEmailAndPassword(email,clave).addOnCompleteListener {
             if(it.isSuccessful){
+                val inte=Intent(this,PerfilActivity::class.java)
+                startActivity(inte)
                 // Por hacer    abrirPerfil()
             }else{
                 Toast.makeText(this,it.exception.toString(),Toast.LENGTH_SHORT).show()
