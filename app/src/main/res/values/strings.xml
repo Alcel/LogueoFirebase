@@ -11,4 +11,5 @@
     <string name="usuario">Usuario</string>
     <string name="nacionalidad">Nacionalidad</string>
     <string name="edad">Edad</string>
+    <string name="save">Guardar</string>
 </resources>

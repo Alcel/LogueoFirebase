@@ -3,7 +3,11 @@ package com.example.logueofirebase
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.LayoutInflater
+import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.example.logueofirebase.databinding.ActivityPerfilBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -20,8 +24,11 @@ class PerfilActivity : AppCompatActivity() {
         setContentView(binding.root)
         var btnResetClave =binding.btnRestablecer
         var btnDeleteUser=binding.delete
+        var btnSave=binding.save
+        showEditTextDialog()
         if(user!=null){
             setup(user?.email.toString())
+
         }
 
         btnResetClave.setOnClickListener {
@@ -44,9 +51,85 @@ class PerfilActivity : AppCompatActivity() {
 
             }
         }
+        btnSave.setOnClickListener {
+            val documentReference = Firebase.firestore.collection("user").document(user?.email.toString())
+            documentReference.update("usuario",binding.usuarioText.text)
+            documentReference.update("nacionalidad",binding.nacionalidadText.text)
+            documentReference.update("edad",binding.edadText.text)
+
+        }
+
 
 
     }
+
+    private fun showEditTextDialog(){
+        var correoText = binding.correoText
+        var usuarioText = binding.usuarioText
+        var nacText = binding.nacionalidadText
+        var edadText = binding.edadText
+
+
+        usuarioText.setOnClickListener {
+            val builder = AlertDialog.Builder(this)
+            val inflater = layoutInflater
+            val dialogLayout = inflater.inflate(R.layout.edit_text,null)
+            val editText=dialogLayout.findViewById<EditText>(R.id.editTextPop)
+            with(builder){
+                setTitle("Introduzca el nuevo usuario")
+                setPositiveButton("Guardar"){dialog,which->
+                    usuarioText.text=editText.text.toString()
+
+                }
+                setNegativeButton("Cancelar"){dialog,which->
+                    Log.d("Main","Negative button clicked")
+
+                }
+                setView(dialogLayout)
+                show()
+            }
+        }
+        nacText.setOnClickListener {
+            val builder = AlertDialog.Builder(this)
+            val inflater = layoutInflater
+            val dialogLayout = inflater.inflate(R.layout.edit_text,null)
+            val editText=dialogLayout.findViewById<EditText>(R.id.editTextPop)
+            with(builder){
+                setTitle("Introduzca su nacionalidad")
+                setPositiveButton("Guardar"){dialog,which->
+                    nacText.text=editText.text.toString()
+
+                }
+                setNegativeButton("Cancelar"){dialog,which->
+                    Log.d("Main","Negative button clicked")
+
+                }
+                setView(dialogLayout)
+                show()
+            }
+        }
+        edadText.setOnClickListener {
+            val builder = AlertDialog.Builder(this)
+            val inflater = layoutInflater
+            val dialogLayout = inflater.inflate(R.layout.edit_text,null)
+            val editText=dialogLayout.findViewById<EditText>(R.id.editTextPop)
+            with(builder){
+                setTitle("Introduzca su edad")
+                setPositiveButton("Guardar"){dialog,which->
+                    edadText.text=editText.text.toString()
+
+                }
+                setNegativeButton("Cancelar"){dialog,which->
+                    Log.d("Main","Negative button clicked")
+
+                }
+                setView(dialogLayout)
+                show()
+            }
+        }
+
+    }
+
     fun setup(email:String){
         val btnCerrar=binding.btnCerrar
         var titulo = binding.tituloText
