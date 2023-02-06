@@ -30,6 +30,10 @@ class MainActivity : AppCompatActivity() {
             clave = binding.editTextClave.text.toString()
             crearNuevoUsuario(correo,clave) }
         binding.imageButton.setOnClickListener { iniciarSesionGoogle() }
+        binding.buttonLogIn.setOnClickListener {
+            correo = binding.editTextUsuario.text.toString()
+            clave = binding.editTextClave.text.toString()
+            iniciarSesion(correo,clave) }
 
     }
     fun crearNuevoUsuario(email:String, clave: String) {
@@ -37,7 +41,7 @@ class MainActivity : AppCompatActivity() {
             .addOnCompleteListener {
                 if(it.isSuccessful){
                     println("bien")
-                 // Por hacer   abrirPerfil()
+
                 }
                 else{
                     println(email)
@@ -51,7 +55,7 @@ class MainActivity : AppCompatActivity() {
     fun iniciarSesion(email:String,clave: String){
         FirebaseAuth.getInstance().signInWithEmailAndPassword(email,clave).addOnCompleteListener {
             if(it.isSuccessful){
-                // Por hacer    abrirPerfil()
+                startActivity(Intent(this,PerfilActivity::class.java))
             }else{
                 Toast.makeText(this,it.exception.toString(),Toast.LENGTH_SHORT).show()
             }

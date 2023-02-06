@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.logueofirebase.databinding.ActivityPerfilBinding
@@ -18,6 +19,10 @@ class PerfilActivity : AppCompatActivity() {
     var auth:FirebaseAuth=FirebaseAuth.getInstance()
     var user: FirebaseUser?=auth.currentUser
     private lateinit var binding: ActivityPerfilBinding //Diferente
+    lateinit var correoText:TextView
+    lateinit var usuarioText :TextView
+    lateinit var nacText :TextView
+    lateinit var edadText :TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding=ActivityPerfilBinding.inflate(layoutInflater)
@@ -25,11 +30,19 @@ class PerfilActivity : AppCompatActivity() {
         var btnResetClave =binding.btnRestablecer
         var btnDeleteUser=binding.delete
         var btnSave=binding.save
+
+        correoText = binding.correoText
+          usuarioText = binding.usuarioText
+          nacText = binding.nacionalidadText
+          edadText = binding.edadText
         showEditTextDialog()
+
         if(user!=null){
             setup(user?.email.toString())
 
         }
+
+
 
         btnResetClave.setOnClickListener {
             auth.sendPasswordResetEmail(user?.email.toString()).addOnCompleteListener {
@@ -52,6 +65,9 @@ class PerfilActivity : AppCompatActivity() {
             }
         }
         btnSave.setOnClickListener {
+            if(usuarioText.text.toString().equals("")||usuarioText.text.toString()==null){
+                usuarioText.text="Hola"
+            }
             val documentReference = Firebase.firestore.collection("user").document(user?.email.toString())
             documentReference.update("usuario",binding.usuarioText.text)
             documentReference.update("nacionalidad",binding.nacionalidadText.text)
@@ -64,10 +80,7 @@ class PerfilActivity : AppCompatActivity() {
     }
 
     private fun showEditTextDialog(){
-        var correoText = binding.correoText
-        var usuarioText = binding.usuarioText
-        var nacText = binding.nacionalidadText
-        var edadText = binding.edadText
+
 
 
         usuarioText.setOnClickListener {
@@ -128,6 +141,7 @@ class PerfilActivity : AppCompatActivity() {
             }
         }
 
+
     }
 
     fun setup(email:String){
@@ -152,6 +166,7 @@ class PerfilActivity : AppCompatActivity() {
             nacionalidad.text=nacionality
             edad.text=age
         }
+
 
 
         btnCerrar.setOnClickListener {
