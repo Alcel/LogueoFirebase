@@ -14,6 +14,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.rpc.context.AttributeContext.Auth
+import org.checkerframework.checker.units.qual.Length
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding //Diferente
@@ -40,16 +41,14 @@ class MainActivity : AppCompatActivity() {
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, clave)
             .addOnCompleteListener {
                 if(it.isSuccessful){
-                    println("bien")
+                    writeNewUser(email)
+                    startActivity(Intent(this,PerfilActivity::class.java))
 
                 }
                 else{
-                    println(email)
-                    println(clave)
-                    println("baaaaaaaa")
-                    // Por hacer   showErrorAlert()
-                }
+                    Toast.makeText(this,"Error al crear un nuevo usuario", Toast.LENGTH_SHORT)
 
+                }
             }
     }
     fun iniciarSesion(email:String,clave: String){

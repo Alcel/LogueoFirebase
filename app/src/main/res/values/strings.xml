@@ -13,6 +13,6 @@
     <string name="edad">Edad</string>
     <string name="save">Guardar</string>
     <string name="close">Cerrar</string>
-    <string name="reset">Restaurar</string>
+    <string name="reset">¿Olvido su contraseña?</string>
     <string name="delete">Eliminar</string>
 </resources>
