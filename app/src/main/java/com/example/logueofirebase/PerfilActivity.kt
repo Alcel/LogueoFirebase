@@ -65,24 +65,14 @@ class PerfilActivity : AppCompatActivity() {
             }
         }
         btnSave.setOnClickListener {
-            if(usuarioText.text.toString().equals("")||usuarioText.text.toString()==null){
-                usuarioText.text="Hola"
-            }
             val documentReference = Firebase.firestore.collection("user").document(user?.email.toString())
             documentReference.update("usuario",binding.usuarioText.text)
             documentReference.update("nacionalidad",binding.nacionalidadText.text)
             documentReference.update("edad",binding.edadText.text)
-
         }
-
-
-
     }
 
     private fun showEditTextDialog(){
-
-
-
         usuarioText.setOnClickListener {
             val builder = AlertDialog.Builder(this)
             val inflater = layoutInflater

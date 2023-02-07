@@ -15,4 +15,9 @@
     <string name="close">Cerrar</string>
     <string name="reset">¿Olvido su contraseña?</string>
     <string name="delete">Eliminar</string>
+    <string name="avisoRegistro">Ha de introducir su correo</string>
+    <string name="avisoLogin">Ha de introducir tanto correo como contraseña</string>
+    <string name="avisoInicioEx">No existe ese usuario</string>
+    <string name="avisoInicioPass">Contraseña incorrecta</string>
+    <string name="avisoCreacion">Ha surgido un error mientras se creaba</string>
 </resources>
